@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="nieuport_labs — a quiet corner for ideas in flight."
+    />
+    <title>nieuport_labs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Annapurna+SIL:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="landing-page">
+      <div class="video-layer" aria-hidden="true">
+        <video
+          class="background-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+          poster=""
+        >
+          <source
+            src="./nieuport-aircraft-cut.mp4"
+            type="video/mp4"
+          />
+        </video>
+      </div>
+
+      <div class="atmosphere" aria-hidden="true"></div>
+      <div class="film-grain" aria-hidden="true"></div>
+
+      <section class="hero" aria-labelledby="site-title">
+        <h1 id="site-title">nieuport_labs</h1>
+      </section>
+
+      <nav class="site-nav" aria-label="External links">
+        <a class="corner-link corner-link--left" href="https://dashboard.nieuportlabs.cz/">
+          <span>Secret Dashboard</span>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="corner-link corner-link--right" href="https://x.com/nieuport_labs">
+          <span>Find us on X/Twitter</span>
+        </a>
+      </nav>
+    </main>
+
+    <script>
+      document.querySelector('.background-video')?.play().catch(() => {});
+    </script>
+  </body>
+</html>

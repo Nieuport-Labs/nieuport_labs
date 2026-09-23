@@ -1,0 +1,195 @@
+:root {
+  --white: #ffffff;
+  --blue: #81d0eb;
+  --black: #000000;
+  --page-gutter: clamp(1rem, 2.4vw, 2.75rem);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-width: 320px;
+  min-height: 100%;
+  margin: 0;
+  background: var(--black);
+}
+
+body {
+  color: var(--white);
+  font-family: "Annapurna SIL", Georgia, serif;
+}
+
+.landing-page {
+  position: relative;
+  min-height: 100svh;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--black);
+}
+
+.video-layer,
+.background-video,
+.atmosphere {
+  position: absolute;
+  inset: 0;
+}
+
+.video-layer {
+  z-index: -3;
+  overflow: hidden;
+  background: #111;
+}
+
+.background-video {
+  /* The source has archival captions and a corner watermark. The overscan
+     keeps both outside the visible frame while retaining the aircraft. */
+  width: 124%;
+  height: 124%;
+  top: -12%;
+  left: -12%;
+  object-fit: cover;
+  object-position: center 38%;
+  filter: grayscale(1) contrast(1.1) brightness(0.32);
+}
+
+.atmosphere {
+  z-index: -2;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.48) 0%, rgba(0, 0, 0, 0.36) 35%, rgba(0, 0, 0, 0.82) 100%),
+    radial-gradient(ellipse at center, rgba(0, 0, 0, 0.18) 25%, rgba(0, 0, 0, 0.68) 100%);
+}
+
+.film-grain {
+  position: absolute;
+  z-index: -1;
+  inset: -20%;
+  pointer-events: none;
+  opacity: 0.3;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.72'/%3E%3C/svg%3E");
+  background-size: 700px 700px;
+  mix-blend-mode: screen;
+  animation: film-noise 140ms steps(2, end) infinite;
+}
+
+.film-grain::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  opacity: 0.24;
+  background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.08) 0 1px, transparent 1px 3px);
+  mix-blend-mode: overlay;
+}
+
+@keyframes film-noise {
+  0% { background-position: 0 0; }
+  25% { background-position: -38px 21px; }
+  50% { background-position: 24px -46px; }
+  75% { background-position: 61px 34px; }
+  100% { background-position: -17px -29px; }
+}
+
+.hero {
+  display: grid;
+  min-height: 100svh;
+  place-items: center;
+  padding: 5rem var(--page-gutter) 6rem;
+}
+
+h1 {
+  margin: 0;
+  color: var(--blue);
+  font-size: clamp(3.25rem, 8.6vw, 8.75rem);
+  font-weight: 600;
+  line-height: 0.95;
+  letter-spacing: -0.055em;
+  text-align: center;
+  text-shadow: 0 0.08em 0.25em rgba(0, 0, 0, 0.24);
+}
+
+.site-nav {
+  position: absolute;
+  right: var(--page-gutter);
+  bottom: clamp(1rem, 2.4vw, 2.25rem);
+  left: var(--page-gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.corner-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--white);
+  font-size: clamp(1rem, 1.35vw, 1.35rem);
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  transition: color 180ms ease, transform 180ms ease;
+}
+
+.corner-link:hover,
+.corner-link:focus-visible {
+  color: var(--blue);
+}
+
+.corner-link:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 0.35rem;
+}
+
+.arrow {
+  font-size: 1.1em;
+}
+
+@media (max-width: 620px) {
+  .background-video {
+    width: 142%;
+    height: 142%;
+    top: -21%;
+    left: -21%;
+    object-position: 57% center;
+  }
+
+  .hero {
+    padding-bottom: 8rem;
+  }
+
+  .site-nav {
+    align-items: flex-end;
+  }
+
+  .corner-link {
+    max-width: 45%;
+    font-size: 1rem;
+  }
+
+  .corner-link--right {
+    justify-content: flex-end;
+    text-align: right;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .background-video {
+    display: none;
+  }
+
+  .video-layer {
+    background: linear-gradient(135deg, #4b4b4b, #151515 70%);
+  }
+
+  .film-grain {
+    animation: none;
+  }
+
+  .corner-link,
+  .arrow {
+    transition: none;
+  }
+}
